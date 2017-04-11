@@ -1,5 +1,37 @@
 
 
+/*
+	Jason.Lough@gmail.com
+	4/11/2017
+
+	Detect palindromes using javascript and regex. Palindromes are sequences that are the same backwards as forwards. Ex : 
+
+		radar, mom, abccba, xxxxxyyyyyxxxxx
+
+	The way I did it is neat-o, because it builds the string to use as the pattern.
+
+	For ex, the pattern for a 3 letter palindrome would be :
+		(\w)\w?\1
+			match a character, 
+			save it as group 1, 
+			followed by 0 or 1 character, 
+			followed by the match for group 1
+
+	For a 5 (or 4) letter palindrome, the pattern would be :
+		(\w)(\w)\w?\2\1
+
+	4 or 5 because the middle character is optional : \w?
+
+	The clever bit is that it builds the beginning and end of the pattern in the same loop.
+
+	The other clever bit is that it uses the word to test twice : once to get its length and build the pattern, once to actually test it.
+
+	~~ is just a shortcut for 'convert to int, rounding down'
+
+	\\ is necessary to escape \
+*/
+
+
 function palindrome(str) {
 
 	var r = '(\\w)'
@@ -19,7 +51,7 @@ function palindrome(str) {
 }
 
 
-foo('bob') //true
-foo('billy') //false
-foo('applesauce') //false
-foo('xxxxTTTTxxxx') //true
+palindrome('bob') //true
+palindrome('billy') //false
+palindrome('applesauce') //false
+palindrome('xxxxTTTTxxxx') //true
